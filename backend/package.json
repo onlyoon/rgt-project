@@ -2,7 +2,11 @@
   "name": "backend",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/index.ts"
+    "build": "npm install && npx tsc",
+    "start:dev": "npm run build && cross-env NODE_ENV=development node dist/index.js",
+    "start:prod": "npm run build && cross-env NODE_ENV=production node dist/index.js",
+    "clean": "rimraf dist",
+    "prebuild": "npm run clean"
   },
   "dependencies": {
     "@hono/node-server": "^1.13.7",
