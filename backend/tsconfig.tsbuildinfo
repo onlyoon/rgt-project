@@ -1,7 +1,0 @@
-{
-  "root": [
-    "./src/index.ts",
-    "./src/router/index.ts"
-  ],
-  "version": "5.7.2"
-}
