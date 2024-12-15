@@ -2,13 +2,26 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "baseUrl": "src",
+    "outDir": "dist",
+    "rootDir": "./src",
     "strict": true,
-    "verbatimModuleSyntax": true,
+    // "sourceMap": true,
+    "noImplicitAny": true,
+    "noEmit": false,
+    "verbatimModuleSyntax": false,
     "skipLibCheck": true,
     "types": [
       "node"
     ],
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
-  }
+  },
+  "include": [
+    "src/**/*.ts",
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
