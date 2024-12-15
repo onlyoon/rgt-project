@@ -3,7 +3,8 @@ import {
   type InferSelectModel,
   type InferInsertModel,
   eq,
-  ilike
+  ilike,
+  sql
 } from "drizzle-orm";
 
 import {
@@ -17,6 +18,9 @@ import {
   timestamp
 } from "drizzle-orm/pg-core";
 import pg from "pg";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const books = pgTable("books", {
   id: serial("id").primaryKey(),
@@ -30,6 +34,7 @@ export const books = pgTable("books", {
   pageCount: integer("page_count"),
   publisher: varchar("publisher", { length: 255 }),
   price: decimal("price", { precision: 10, scale: 2 }),
+  stockQuantity: integer("stock_quantity").default(0),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow()
 });
@@ -73,6 +78,12 @@ export const getBooks = async (
 
 export const getBookById = async (id: number) =>
   await db.select().from(books).where(eq(books.id, id)).limit(1);
+
+export const getBookQuantity = async () => {
+  const result = await db.select({ count: sql`count(*)` }).from(books);
+
+  return result[0].count;
+};
 
 export const createBook = async (newBook: BookInsert) =>
   await db.insert(books).values(newBook).returning({
