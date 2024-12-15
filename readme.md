@@ -27,7 +27,7 @@
 - SERVER_PORT=${port}
 - PEM_DB=${pem file path}
 
-배포 URL: http://ec2-13-124-197-66.ap-northeast-2.compute.amazonaws.com:8080/
+배포 URL: dev.webprolist.click:8080/
 
 ## 아키텍처 및 설계
 
