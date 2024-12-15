@@ -6,7 +6,8 @@ import {
   updateBookById,
   deleteBookById,
   type BookInsert,
-  type BookSelect
+  type BookSelect,
+  getBookQuantity
 } from "../db/books.js";
 
 export const getBooksList = async (c: Context) => {
@@ -16,12 +17,20 @@ export const getBooksList = async (c: Context) => {
     const authorSearch = c.req.query("author");
 
     const books = await getBooks(page, titleSearch, authorSearch);
+    const totalCount = await getBookQuantity();
 
     if (books.length === 0) {
       return c.json({ message: "no result", data: [] }, 200);
     }
 
-    return c.json(books, 200);
+    return c.json(
+      {
+        data: books,
+        count: totalCount,
+        page: page
+      },
+      200
+    );
   } catch (e) {
     console.error(e);
     return c.json({ error: "error from get Book List" }, 400);
@@ -48,11 +57,11 @@ export const addBook = async (c: Context) => {
       title: body.title,
       author: body.author,
       isbn: body.isbn,
-      publishedDate: new Date(body.published_date).toISOString(),
+      publishedDate: body.publishedDate,
       genre: body.genre,
       description: body.description,
       language: body.language,
-      pageCount: body.page_count,
+      pageCount: body.pageCount,
       publisher: body.publisher,
       price: body.price
     };
