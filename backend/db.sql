@@ -1,4 +1,4 @@
-CREATE TABLE books {
+CREATE TABLE books (
   id SERIAL PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
   author VARCHAR(255) NOT NULL,
@@ -10,6 +10,7 @@ CREATE TABLE books {
   page_count INTEGER,
   publisher VARCHAR(255),
   price DECIMAL(10, 2),
+  stock_quantity INTEGER DEFAULT 0,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-};
+);
