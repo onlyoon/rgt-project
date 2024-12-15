@@ -2,7 +2,7 @@
 
 export const getBook = async (id: number) => {
   try {
-    const url = `http://localhost:8080/api/books/${id}`;
+    const url = `http://dev.webprolist:8080/api/books/${id}`;
 
     const response = await fetch(url);
     const result = await response.json();

@@ -16,7 +16,7 @@ interface BookData {
 export const postBook = async (bookData: BookData) => {
   try {
     console.log(`bookData in postBook`, bookData);
-    const url = `http://localhost:8080/api/books`;
+    const url = `http://dev.webprolist:8080/api/books`;
 
     const response = await fetch(url, {
       method: "POST",

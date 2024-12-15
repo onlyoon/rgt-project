@@ -7,7 +7,7 @@ export const getBooks = async (
   limit: number = 10
 ) => {
   try {
-    const baseUrl = "http://localhost:8080/api/books";
+    const baseUrl = "http://dev.webprolist:8080/api/books";
 
     const params = new URLSearchParams({
       page: page.toString(),

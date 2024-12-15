@@ -47,7 +47,11 @@ const dbConnectingString = process.env.DB;
 const { Pool } = pg;
 
 const pool = new Pool({
-  connectionString: dbConnectingString
+  connectionString: dbConnectingString,
+  ssl: {
+    rejectUnauthorized: false,
+    ca: process.env.PEM_DB
+  }
 });
 
 const db = drizzle(pool);
