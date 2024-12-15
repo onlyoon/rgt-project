@@ -7,7 +7,7 @@
     "start:prod": "npm run build && cross-env NODE_ENV=production node dist/index.js",
     "clean": "rimraf dist",
     "prebuild": "npm run clean",
-    "copy-public": "xcopy /E /I /Y public dist\\public"
+    "copy-public": "cp -R public dist/"
   },
   "dependencies": {
     "@hono/node-server": "^1.13.7",
