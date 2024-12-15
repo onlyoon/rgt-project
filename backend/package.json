@@ -2,11 +2,12 @@
   "name": "backend",
   "type": "module",
   "scripts": {
-    "build": "npm install && npx tsc",
+    "build": "npm install && npx tsc && npm run copy-public",
     "start:dev": "npm run build && cross-env NODE_ENV=development node dist/index.js",
     "start:prod": "npm run build && cross-env NODE_ENV=production node dist/index.js",
     "clean": "rimraf dist",
-    "prebuild": "npm run clean"
+    "prebuild": "npm run clean",
+    "copy-public": "xcopy /E /I /Y public dist\\public"
   },
   "dependencies": {
     "@hono/node-server": "^1.13.7",

@@ -4,21 +4,28 @@ import { compress } from "hono/compress";
 import { cors } from "hono/cors";
 import { showRoutes } from "hono/dev";
 import router from "./router/index.js";
-import "dotenv/config";
+import { serveStatic } from "@hono/node-server/serve-static";
+import dotenv from "dotenv";
+import { readFile } from "fs/promises";
+
+dotenv.config();
 
 const app = new Hono();
 
-app.use(
-  cors({
-    credentials: true,
-    origin: "*", // 모든 출처 허용
-    allowMethods: ["GET", "POST", "PUT", "DELETE"]
-  })
-);
+app.use("/assets/*", serveStatic({ root: "./public" }));
 
 app.use(compress());
 
 app.route("/api", router);
+
+app.get("*", async (c) => {
+  try {
+    const content = await readFile("./public/index.html", "utf-8");
+    return c.html(content);
+  } catch (error) {
+    return c.text("File not found", 404);
+  }
+});
 
 console.log(showRoutes(app));
 
