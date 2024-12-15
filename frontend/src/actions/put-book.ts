@@ -15,7 +15,7 @@ interface BookData {
 
 export const putBook = async (id: number, bookData: BookData) => {
   try {
-    const url = `http://dev.webprolist:8080/api/books/${id}`;
+    const url = `http://dev.webprolist.click:8080/api/books/${id}`;
 
     const response = await fetch(url, {
       method: "PUT",
